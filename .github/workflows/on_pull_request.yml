@@ -1,0 +1,31 @@
+name: LIFF
+on:
+  pull_request:
+defaults:
+  run:
+    shell: bash
+jobs:
+  helloWorld:
+    name: Hello World Job
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+      # - run: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
+      # - run: pip install wheel setuptools
+      - name: Checking environment
+        run: |
+          echo $(pwd)
+          echo $(ls)
+          # python --version
+      - name: test python
+        run: |
+          cd ../home
+          echo $(ls)
+          echo $(pwd)
+        # working-directory: ./liff
+#      - name: Setup selenium
+#      - run: pip install selenium
+#      - name: check current directory
