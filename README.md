@@ -2,6 +2,12 @@
 #### 最新のActions
 https://github.com/actions/virtual-environments/
 
+* チェックアウトしないと working-directory は有効にならない
+
+```
+      - uses: actions/checkout@v2
+```
+
 #### act
 https://github.com/nektos/act#configuration
 
@@ -31,6 +37,11 @@ To use a different image for the runner, use the -P option.
 ```
 act -P <platform>=<docker-image>
 ```
+
+
+my.env は act をローカルで試す際に使う
+git上は、.gitignore対象にしてある
+
 
 ### About Selenium
 
