@@ -26,7 +26,10 @@ class Liff:
         id_box.send_keys(self.login_name)
         pw_box.send_keys(self.login_pw)
         pw_box.submit()
+        print('LIFF Login done')
+
 
     def quit(self):
-        input()
+        # input() # ローカルで実施する場合
+        print('All done')
         self.driver.quit()
