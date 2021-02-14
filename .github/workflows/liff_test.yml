@@ -35,4 +35,4 @@ jobs:
         run: |
           python LiffTest.py $LIFF_URL $LIFF_ID $LIFF_PW
       - name: show log
-          cat my_liff.log
+        run: cat my_liff.log
