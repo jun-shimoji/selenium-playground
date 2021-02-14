@@ -19,13 +19,14 @@ jobs:
         run: |
           echo $(pwd)
           echo $(ls)
-          # python --version
+          python --version
       - name: test python
         run: |
           cd ../home
           echo $(ls)
           echo $(pwd)
-        # working-directory: ./liff
+          python test.py
+        working-directory: ./liff/
 #      - name: Setup selenium
 #      - run: pip install selenium
 #      - name: check current directory
