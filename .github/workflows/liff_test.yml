@@ -1,4 +1,4 @@
-name: LIFF
+name: LIFF Tests
 on:
   pull_request:
   workflow_dispatch:
@@ -13,7 +13,7 @@ defaults:
     working-directory: ./
 
 jobs:
-  helloWorld:
+  LINE_Login:
     name: Hello World Job
     runs-on: ubuntu-latest
     steps:
@@ -31,8 +31,8 @@ jobs:
           pip install selenium
           pip install toml
           pip install chromedriver-binary
-          # pip install chromedriver-binary==80.0.3987.106
-      - name: test python
+      - name: execute webdriver
         run: |
-          echo $(apt list --installed google*)
           python LiffTest.py $LIFF_URL $LIFF_ID $LIFF_PW
+      - name: show log
+          cat my_liff.log

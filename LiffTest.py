@@ -2,7 +2,7 @@ import sys
 import toml
 import Logins
 
-CONFIG_FILE='my.env'
+CONFIG_FILE='my.env' # act確認用
 
 CAT3_XPATH="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"
 CALENDAR_NEXT="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
@@ -12,16 +12,17 @@ CALENDAR_CONFIRM="/html/body/div/div/div[3]/div/div/div/div[3]/div/button"
 CALENDAR_RESERVE="/html/body/div/div/div[1]/div/footer/div/div/div/button[2]"
 DIALOG_MESSAGE="/html/body/div/div/div[4]/div/div/div/div/div"
 
-print('引数の数', len(sys.argv))
 if(len(sys.argv) == 1):
     my_file  = toml.load(open(CONFIG_FILE))
     LIFF_URL = my_file['LIFF_URL']
     LIFF_ID  = my_file['LIFF_ID']
     LIFF_PW  = my_file['LIFF_PW']
-elif(len(sys.argv) > 1):
+elif(len(sys.argv) > 1 and len(sys.argv) <= 4 ):
     LIFF_URL = sys.argv[1]
     LIFF_ID  = sys.argv[2]
     LIFF_PW  = sys.argv[3]
+else:
+    exit -1
 
 print('LIFF_URL', LIFF_URL)
 print('LIFF_ID', LIFF_ID)

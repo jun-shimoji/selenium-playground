@@ -13,7 +13,7 @@ class Liff:
         self.options.add_argument("--log-level=1")
         self.driver = webdriver.Chrome(
                                 options=self.options,
-                                service_args=["--log-path=mylog.log"]
+                                service_args=["--log-path=my_liff.log"]
                                 )
 
     def login(self):
