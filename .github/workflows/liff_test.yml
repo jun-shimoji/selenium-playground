@@ -5,6 +5,8 @@ on:
 
 env:
   LIFF_URL: ${{ secrets.LIFF_URL }}
+  LIFF_ID: ${{ secrets.LIFF_ID }}
+  LIFF_PW: ${{ secrets.LIFF_PW }}
 defaults:
   run:
     shell: bash
