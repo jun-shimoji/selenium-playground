@@ -14,7 +14,7 @@ defaults:
 
 jobs:
   LINE_Login:
-    name: Hello World Job
+    name: Job Liff Test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2    
@@ -40,4 +40,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: selenium-log
-          path: ./selenium.log
+          path: ./my_liff.log
