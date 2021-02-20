@@ -1,33 +1,49 @@
 import sys
 import toml
+import argparse
 import Logins
 
-CONFIG_FILE='my.env' # act確認用
+parser = argparse.ArgumentParser(description='LIFF tests')  
+parser.add_argument('-f', '--file', help='import toml file')
+parser.add_argument('--headless', action='store_true', help='selenium headless mode')
+parser.add_argument('--gha', action='store_true', help='for GitHubActions') # --gha がつくとTrue
 
-CAT3_XPATH="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"
-CALENDAR_NEXT="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
-CALENDAR_SELECT="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[1]/td[3]"
-CALENDAR_DECIDE="/html/body/div/div/div/div/footer/div/div/div/button[2]"
+args = parser.parse_args() 
+
+print("args.file", args.file)
+print("args.headless", args.headless)
+
+CAT3_XPATH      ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"
+CALENDAR_NEXT   ="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
+CALENDAR_SELECT ="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[1]/td[3]"
+CALENDAR_DECIDE ="/html/body/div/div/div/div/footer/div/div/div/button[2]"
 CALENDAR_CONFIRM="/html/body/div/div/div[3]/div/div/div/div[3]/div/button"
 CALENDAR_RESERVE="/html/body/div/div/div[1]/div/footer/div/div/div/button[2]"
-DIALOG_MESSAGE="/html/body/div/div/div[4]/div/div/div/div/div"
+DIALOG_MESSAGE  ="/html/body/div/div/div[4]/div/div/div/div/div"
 
-if(len(sys.argv) == 1):
-    my_file  = toml.load(open(CONFIG_FILE))
+# -f 指定がある場合
+if(args.file):
+    my_file  = toml.load(open(args.file))
     LIFF_URL = my_file['LIFF_URL']
     LIFF_ID  = my_file['LIFF_ID']
     LIFF_PW  = my_file['LIFF_PW']
-elif(len(sys.argv) > 1 and len(sys.argv) <= 4 ):
+
+# --gha オプションがある場合
+if(args.gha):
     LIFF_URL = sys.argv[1]
     LIFF_ID  = sys.argv[2]
     LIFF_PW  = sys.argv[3]
-else:
-    exit -1
+    HEADLESS = True
+
+# ヘッドレスモードの設定
+HEADLESS = True if args.headless else False
 
 print('LIFF_URL', LIFF_URL)
 print('LIFF_ID', LIFF_ID)
 print('LIFF_PW', LIFF_PW)
-my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW)
+print('HEADLESS', HEADLESS)
+input()
+my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
 
 
 # ログイン処理

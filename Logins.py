@@ -4,12 +4,12 @@ from selenium.webdriver.chrome.options import Options
 
 class Liff:
 
-    def __init__(self, url, login_name, login_pw):
+    def __init__(self, url, login_name, login_pw, headless):
         self.url = url
         self.login_name = login_name
         self.login_pw = login_pw
         self.options = Options()
-        self.options.add_argument('--headless')
+        if(headless):self.options.add_argument('--headless')
         self.options.add_argument("--log-level=1")
         self.driver = webdriver.Chrome(
                                 options=self.options,

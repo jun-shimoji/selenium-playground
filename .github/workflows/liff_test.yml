@@ -33,6 +33,6 @@ jobs:
           pip install chromedriver-binary
       - name: execute webdriver
         run: |
-          python LiffTest.py $LIFF_URL $LIFF_ID $LIFF_PW
+          python LiffTest.py $LIFF_URL $LIFF_ID $LIFF_PW --headless
       # - name: show log
         # run: cat my_liff.log

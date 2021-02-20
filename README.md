@@ -1,3 +1,46 @@
+### 構成
+
+```
+.
+├── LiffTest.py
+├── Logins.py
+├── README.md
+├── my.env // act確認用、ローカルで使用
+└── test.py
+```
+
+### 環境変数
+githubactionsのseqretsに入れる者
+
+|  変数名  |             意味             |
+| -------- | ---------------------------- |
+| LIFF_URL | LIFFのURL                    |
+| LIFF_ID  | LINEログインに使うID         |
+| LIFF_PW  | LINEログインに使うパスワード |
+
+### 使用方法
+
+* ファイル指定
+
+```
+python LiffTest.py -f my.env
+```
+
+* headlessモード
+
+```
+python LiffTest.py --headless true
+```
+
+
+* 引数なし
+    * my.envの値を読み込む
+
+```
+python LiffTest.py
+
+```
+
 ### Actions and ACT
 #### 最新のActions
 https://github.com/actions/virtual-environments/
