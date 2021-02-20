@@ -4,9 +4,12 @@ import argparse
 import Logins
 
 parser = argparse.ArgumentParser(description='LIFF tests')  
-parser.add_argument('-f', '--file', help='import toml file')
+parser.add_argument('--url'     , help='LIFF URL')
+parser.add_argument('--id'      , help='LIFF ID')
+parser.add_argument('--pw'      , help='LIFF PW')
+parser.add_argument('-f'        , '--file', help='import config file (toml format)')
+parser.add_argument('--gha'     , action='store_true', help='for GitHubActions') # --gha がつくとTrue
 parser.add_argument('--headless', action='store_true', help='selenium headless mode')
-parser.add_argument('--gha', action='store_true', help='for GitHubActions') # --gha がつくとTrue
 
 args = parser.parse_args() 
 
@@ -30,9 +33,9 @@ if(args.file):
 
 # --gha オプションがある場合
 if(args.gha):
-    LIFF_URL = sys.argv[1]
-    LIFF_ID  = sys.argv[2]
-    LIFF_PW  = sys.argv[3]
+    LIFF_URL = args.url
+    LIFF_ID  = args.id
+    LIFF_PW  = args.pw
     HEADLESS = True
 
 # ヘッドレスモードの設定
@@ -42,7 +45,7 @@ print('LIFF_URL', LIFF_URL)
 print('LIFF_ID', LIFF_ID)
 print('LIFF_PW', LIFF_PW)
 print('HEADLESS', HEADLESS)
-input()
+
 my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
 
 
