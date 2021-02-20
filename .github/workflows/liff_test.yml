@@ -34,5 +34,10 @@ jobs:
       - name: execute webdriver
         run: |
           python LiffTest.py --url $LIFF_URL --id $LIFF_ID --pw $LIFF_PW --headless --gha
-      # - name: show log
-        # run: cat my_liff.log
+      - name: show log
+        run: cat my_liff.log
+      - name: save log
+        uses: actions/upload-artifact@v2
+        with:
+          name: selenium-log
+          path: ./selenium.log

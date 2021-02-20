@@ -11,7 +11,7 @@
 ```
 
 ### 環境変数
-githubactionsのseqretsに入れる値
+GitHubActionsのseqretsに入れる値
 
 |  変数名  |             意味             |
 | -------- | ---------------------------- |
@@ -43,17 +43,12 @@ python LiffTest.py
 ```
 
 ### Actions and ACT
-#### 最新のActions
-https://github.com/actions/virtual-environments/
 
 * チェックアウトしないと working-directory は有効にならない
 
 ```
       - uses: actions/checkout@v2
 ```
-
-#### act
-https://github.com/nektos/act#configuration
 
 * pull requestをイベントトリガーにして実施
 
@@ -102,7 +97,10 @@ killall chromedriver
 ```
 
 ### 参考
-
+* 最新のGHA
+    * https://github.com/actions/virtual-environments/
+* act
+    * https://github.com/nektos/act#configuration
 * actを使うとGithub Actionsのワークフロー定義をローカルで確認しながらやれて便利
     * https://masaru-tech.hateblo.jp/entry/2020/07/17/100621
 * [GitHub]Actionsの動作確認時は忘れずにACTIONS_RUNNER_DEBUGとACTIONS_STEP_DEBUGを設定しよう
