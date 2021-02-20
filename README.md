@@ -88,13 +88,28 @@ act -P <platform>=<docker-image>
 act --secret-file my.env pull_request
 ```
 
-### About Selenium
+### Selenium
 
-* 残ってしまったchromeを一括削除
+* オプションでログレベルを変えることができる
+* ただ、secretsの内容とかも出力されるから使わない
+
+```
+        self.options.add_argument("--log-level=1")
+        self.driver = webdriver.Chrome(
+                                options=self.options,
+                                service_args=["--log-path=my.log"]
+                                )
+```
+
+* (ローカル開発などで)残ってしまったchromeを一括削除する
 
 ```
 killall chromedriver
 ```
+
+### Logging
+
+
 
 ### 参考
 * 最新のGHA
@@ -107,3 +122,9 @@ killall chromedriver
     * https://dev.classmethod.jp/articles/set-secrets-before-actions-test/
 * argpaseの解説
     * https://qiita.com/kzkadc/items/e4fc7bc9c003de1eb6d0
+* loggingのタイムスタンプ設定方法
+    * https://www.it-swarm.jp.net/ja/python/python%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E3%81%AE%E6%99%82%E9%96%93%E5%BD%A2%E5%BC%8F%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%AF%EF%BC%9F/969378224/
+* 「含む」テキスト検索
+    * https://stackoverflow.com/questions/12323403/how-do-i-find-an-element-that-contains-specific-text-in-selenium-webdriver-pyth
+* クローラ作成に必須！XPATHの記法まとめ
+    * https://qiita.com/rllllho/items/cb1187cec0fb17fc650a

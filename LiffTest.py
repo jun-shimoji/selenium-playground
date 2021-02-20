@@ -1,6 +1,6 @@
-import sys
 import toml
 import argparse
+import logging
 import Logins
 
 parser = argparse.ArgumentParser(description='LIFF tests')  
@@ -10,19 +10,19 @@ parser.add_argument('--pw'      , help='LIFF PW')
 parser.add_argument('-f'        , '--file', help='import config file (toml format)')
 parser.add_argument('--gha'     , action='store_true', help='for GitHubActions') # --gha がつくとTrue
 parser.add_argument('--headless', action='store_true', help='selenium headless mode')
+parser.add_argument('--logging' , default='INFO', help='logging level')
 
 args = parser.parse_args() 
 
-print("args.file", args.file)
-print("args.headless", args.headless)
+# フォーマットを定義
+formatter = '%(asctime)s:%(levelname)s: %(message)s'
 
-CAT3_XPATH      ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"
-CALENDAR_NEXT   ="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
-CALENDAR_SELECT ="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[1]/td[3]"
-CALENDAR_DECIDE ="/html/body/div/div/div/div/footer/div/div/div/button[2]"
-CALENDAR_CONFIRM="/html/body/div/div/div[3]/div/div/div/div[3]/div/button"
-CALENDAR_RESERVE="/html/body/div/div/div[1]/div/footer/div/div/div/button[2]"
-DIALOG_MESSAGE  ="/html/body/div/div/div[4]/div/div/div/div/div"
+# ログレベルを 変更
+LOGLEVEL='logging.' + args.logging
+logging.basicConfig(filename='my.log',
+                    level=eval(LOGLEVEL),
+                    format=formatter,
+                    datefmt='%Y-%m-%d %H:%M:%S')
 
 # -f 指定がある場合
 if(args.file):
@@ -41,10 +41,10 @@ if(args.gha):
 # ヘッドレスモードの設定
 HEADLESS = True if args.headless else False
 
-print('LIFF_URL', LIFF_URL)
-print('LIFF_ID', LIFF_ID)
-print('LIFF_PW', LIFF_PW)
-print('HEADLESS', HEADLESS)
+logging.debug('LIFF_URL %s', LIFF_URL)
+logging.debug('LIFF_ID %s', LIFF_ID)
+logging.debug('LIFF_PW %s', LIFF_PW)
+logging.debug('HEADLESS %s', HEADLESS)
 
 my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
 
@@ -54,10 +54,23 @@ try:
     my_liff.login()
 
 except Exception as e:
-    print('error:' + str(e))
+    logging.error('ログイン失敗', str(e))
 
-"""
+# ステップ1処理
+try:
+    my_liff.input_step1()
+
+except Exception as e:
+    logging.error('step1失敗', str(e))
+
 # カレンダー選択
+try:
+    my_liff.select_calendar()
+
+except Exception as e:
+    logging.error('カレンダー選択失敗', str(e))
+
+'''
 try:
     # 分類1を入力
     cat1_box = driver.find_element_by_id("input-33")
@@ -108,7 +121,7 @@ try:
         driver.back()
 
 except Exception as e:
-    print('error:' + str(e))
-"""
+    logging.error('%s', str(e))
+'''
 
 my_liff.quit()
