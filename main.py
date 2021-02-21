@@ -1,7 +1,7 @@
 import toml
 import argparse
 import logging
-import Logins
+import manipulate
 
 LOGFILE='my_liff.log'
 parser = argparse.ArgumentParser(description='LIFF tests')  
@@ -49,7 +49,7 @@ logging.debug('LIFF_PW %s', LIFF_PW)
 logging.debug('HEADLESS %s', HEADLESS)
 
 # インスタンス作成
-my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
+my_liff = manipulate.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
 
 
 # ログイン処理

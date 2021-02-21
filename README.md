@@ -1,16 +1,15 @@
-### 構成
+## 構成
 
 ```
 .
-├── LiffTest.py
-├── Logins.py
-├── README.md
+├── main.py          // LIFFテストのメイン
+├── manipulate.py    // main.pyのオブジェクト・関数
+├── README.md        // これ
 ├── my-example.env   // act確認のサンプルファイル
-├── my.env           // act確認の設定ファイル(.gitignore対象)
-└── test.py
+└── my.env           // act確認の設定ファイル(.gitignore対象)
 ```
 
-### 環境変数
+## 環境変数
 GitHubActionsのseqretsに入れる値
 
 |  変数名  |             意味             |
@@ -19,29 +18,28 @@ GitHubActionsのseqretsに入れる値
 | LIFF_ID  | LINEログインに使うID         |
 | LIFF_PW  | LINEログインに使うパスワード |
 
-### 使用方法
+## 使用方法
 
 * ファイル指定
 
 ```
-python LiffTest.py -f my.env
+python main.py -f my.env
 ```
 
 * headlessモード
 
 ```
-python LiffTest.py --headless true
+python main.py --headless true
 ```
 
-
-* 引数なし
-    * my.envの値を読み込む
+* usage
 
 ```
-python LiffTest.py
+python main.py -h
 
 ```
 
+## 備忘
 ### Actions and ACT
 
 * チェックアウトしないと working-directory は有効にならない
@@ -107,10 +105,13 @@ act --secret-file my.env pull_request
 killall chromedriver
 ```
 
-* 表示されていない箇所はクリックできない
-    * headlessmodeであっても。
+* macだとcommand+tabに残り続けるので、できるだけ `try and except` を適用した方がよい
 
-### 参考
+* 表示されていない箇所はクリックできない
+    * headlessmodeであっても
+
+
+### 参考URL
 * 最新のGitHubActions環境
     * https://github.com/actions/virtual-environments/
 * act
