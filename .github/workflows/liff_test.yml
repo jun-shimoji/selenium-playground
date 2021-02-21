@@ -22,8 +22,8 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: '3.8'
-      # - run: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
-      # - run: pip install wheel setuptools
+      - run: curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py && python get-pip.py
+      - run: pip install wheel setuptools
       - name: Checking environment
         run: python --version
       - name: Setup selenium
