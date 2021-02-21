@@ -26,8 +26,8 @@ class Liff:
         self.url          = url
         self.login_name   = login_name
         self.login_pw     = login_pw
-        self.calendar_row = 2          #火曜日
-        self.calendar_col = 2          #1コマ目
+        self.calendar_row = 1          #1コマ目
+        self.calendar_col = 3          #火曜日
         self.options      = Options()
         if(headless):self.options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=self.options)
@@ -81,6 +81,7 @@ class Liff:
         logging.info('要素が表示されるように画面移動してクリック')
         self.driver.execute_script("arguments[0].scrollIntoView(true);", btn_calendar_select)
         btn_calendar_select.click()
+        input('stop')
         time.sleep(0.5)
 
         logging.info('カレンダーで日付を確定')
