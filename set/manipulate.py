@@ -81,7 +81,6 @@ class Liff:
         logging.info('要素が表示されるように画面移動してクリック')
         self.driver.execute_script("arguments[0].scrollIntoView(true);", btn_calendar_select)
         btn_calendar_select.click()
-        input('stop')
         time.sleep(0.5)
 
         logging.info('カレンダーで日付を確定')
