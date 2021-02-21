@@ -26,8 +26,8 @@ class Liff:
         self.url          = url
         self.login_name   = login_name
         self.login_pw     = login_pw
-        self.calendar_row = 1
-        self.calendar_col = 2
+        self.calendar_row = 2          #火曜日
+        self.calendar_col = 2          #1コマ目
         self.options      = Options()
         if(headless):self.options.add_argument('--headless')
         self.driver = webdriver.Chrome(options=self.options)

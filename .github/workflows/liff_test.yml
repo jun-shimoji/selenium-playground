@@ -1,6 +1,7 @@
 name: LIFF Tests
 on:
-  pull_request:
+  schedule:
+    - cron: '0 */1 * * *'
   workflow_dispatch:
 
 env:
