@@ -10,7 +10,7 @@ env:
 defaults:
   run:
     shell: bash
-    working-directory: ./
+    working-directory: ./set
 
 jobs:
   LINE_Login:
