@@ -9,7 +9,6 @@ from selenium.webdriver.common.keys import Keys
 CAT3_XPATH      ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"                    
 CALENDAR_NEXT   ="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
 
-# CALENDAR_SELECT ="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[2]/td[5]"
 def set_calendar_xpath(row, col):
     CALENDAR_SELECT ="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[" + str(row) + "]/td[" + str(col) + "]"
     logging.info('CALENDAR_SELECT %s', CALENDAR_SELECT)
@@ -73,18 +72,19 @@ class Liff:
 
         logging.info('「カレンダー設定に進む」をクリック')
         cat3_box.submit()
-        time.sleep(1)
-        logging.info('クリック終了')
+        time.sleep(4)
 
     def select_calendar(self):
 
         logging.info('カレンダーで次へを選択')
         btn_calendar_next = self.driver.find_element_by_xpath(CALENDAR_NEXT)
         btn_calendar_next.click()
-        time.sleep(0.5)
+        time.sleep(1)
 
         logging.info('カレンダーで日付を選択')
         btn_calendar_select = self.driver.find_element_by_xpath(set_calendar_xpath(self.calendar_row, self.calendar_col))
+        logging.info('要素が表示されるように画面移動してクリック')
+        self.driver.execute_script("arguments[0].scrollIntoView(true);", btn_calendar_select)
         btn_calendar_select.click()
         time.sleep(0.5)
 
@@ -105,10 +105,10 @@ class Liff:
         logging.info('カレンダー選択終了')
 
     def check_result(self):
-
+        time.sleep(1)
         try:
             if(self.driver.find_element_by_xpath('//*[contains(text(), "予約が完了しました")]')):
-                return '予約が完了しました'
+                return 'row: ' + str(self.calendar_row) + ' col: ' +str(self.calendar_col) +  'コマで予約完了しました'
         except:
             pass
 
@@ -120,6 +120,7 @@ class Liff:
                 time.sleep(2)
                 return '予約済みです'
         except:
+            logging.error('正しく確認できず')
             return '正しく確認できず'
 
 

@@ -74,6 +74,6 @@ while result == '予約済みです':
         logging.error('カレンダー選択失敗', str(e))
 
     result = my_liff.check_result()
-    logging.info('予約結果確認 %s', result)
+
 
 my_liff.quit(args.logging)

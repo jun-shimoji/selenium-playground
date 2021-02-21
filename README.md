@@ -107,12 +107,11 @@ act --secret-file my.env pull_request
 killall chromedriver
 ```
 
-### Logging
-
-
+* 表示されていない箇所はクリックできない
+    * headlessmodeであっても。
 
 ### 参考
-* 最新のGHA
+* 最新のGitHubActions環境
     * https://github.com/actions/virtual-environments/
 * act
     * https://github.com/nektos/act#configuration
@@ -124,7 +123,9 @@ killall chromedriver
     * https://qiita.com/kzkadc/items/e4fc7bc9c003de1eb6d0
 * loggingのタイムスタンプ設定方法
     * https://www.it-swarm.jp.net/ja/python/python%E3%83%AD%E3%82%AE%E3%83%B3%E3%82%B0%E3%81%AE%E6%99%82%E9%96%93%E5%BD%A2%E5%BC%8F%E3%82%92%E3%82%AB%E3%82%B9%E3%82%BF%E3%83%9E%E3%82%A4%E3%82%BA%E3%81%99%E3%82%8B%E6%96%B9%E6%B3%95%E3%81%AF%EF%BC%9F/969378224/
-* 「含む」テキスト検索
+* [selenium]「含む」テキスト検索
     * https://stackoverflow.com/questions/12323403/how-do-i-find-an-element-that-contains-specific-text-in-selenium-webdriver-pyth
 * クローラ作成に必須！XPATHの記法まとめ
     * https://qiita.com/rllllho/items/cb1187cec0fb17fc650a
+* [Python] seleniumで.click()ができない
+    * https://hacknote.jp/archives/51261/
