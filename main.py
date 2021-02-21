@@ -48,6 +48,7 @@ logging.debug('LIFF_ID %s', LIFF_ID)
 logging.debug('LIFF_PW %s', LIFF_PW)
 logging.debug('HEADLESS %s', HEADLESS)
 
+# インスタンス作成
 my_liff = Logins.Liff(LIFF_URL, LIFF_ID, LIFF_PW, HEADLESS)
 
 
@@ -61,11 +62,11 @@ except Exception as e:
 # 予約結果確認
 result = '予約済みです'
 while result == '予約済みです':
-    # ステップ1処理
+    # 帳票入力
     try:
         my_liff.input_data()
     except Exception as e:
-        logging.error('step1失敗', str(e))
+        logging.error('帳票入力失敗', str(e))
 
     # カレンダー選択
     try:
@@ -73,6 +74,7 @@ while result == '予約済みです':
     except Exception as e:
         logging.error('カレンダー選択失敗', str(e))
 
+    # 結果確認
     result = my_liff.check_result()
 
 

@@ -4,11 +4,12 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.keys import Keys
 
-# CAT3_XPATH    ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[2]/div/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"
-# CAT3_XPATH    ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[2]/following-sibling::div/input"
-CAT3_XPATH      ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]"                    
+CAT1_XPATH      ='/html/body/div/div/div/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[1]/div/div[1]/div[1]/input[1]'
+CAT2_XPATH      ='/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[2]/div/div[1]/div[1]/input[1]'
+CAT3_XPATH      ="/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[3]/div/div[1]/div[1]/input[1]" 
 CALENDAR_NEXT   ="/html/body/div/div/div/div/div[1]/div/div/div/div[1]/div/button[2]"
 
+# カレンダーのxpath作成
 def set_calendar_xpath(row, col):
     CALENDAR_SELECT ="/html/body/div/div/div/div/div[1]/div/div/div/div[2]/div/div/div/div/table/tbody/tr[" + str(row) + "]/td[" + str(col) + "]"
     logging.info('CALENDAR_SELECT %s', CALENDAR_SELECT)
@@ -44,22 +45,16 @@ class Liff:
         logging.info('ログイン成功')
 
     def input_data(self):
-        logging.info('入力開始')
+        logging.info('帳票入力開始')
         logging.info('分類1入力')
         time.sleep(4)
-        #1回目 /html/body/div/div/div/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[1]/div/div[1]/div[1]/input[1]
-        #2回目 (同じ？)
-        my_xpath1 = '/html/body/div/div/div/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[1]/div/div[1]/div[1]/input[1]'
-        cat1_box = self.driver.find_element_by_xpath(my_xpath1)
+        cat1_box = self.driver.find_element_by_xpath(CAT1_XPATH)
         cat1_box.send_keys('PNL1')
         cat1_box.send_keys(Keys.ENTER)
         time.sleep(0.5)
 
         logging.info('分類2入力')
-        #1回目 /html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[2]/div/div[1]/div[1]/input[1]
-        #2回目 /html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[2]/div/div[1]/div[1]/input[1]
-        my_xpath2 = '/html/body/div/div/div[1]/div/div[1]/div[1]/div/div/form/div[1]/div/div/div/div/div/div[3]/div/div/div/div[2]/div/div[1]/div[1]/input[1]'
-        cat2_box = self.driver.find_element_by_xpath(my_xpath2)
+        cat2_box = self.driver.find_element_by_xpath(CAT2_XPATH)
         cat2_box.send_keys('PNL2')
         cat2_box.send_keys(Keys.ENTER)
         time.sleep(0.5)
@@ -120,8 +115,8 @@ class Liff:
                 time.sleep(2)
                 return '予約済みです'
         except:
-            logging.error('正しく確認できず')
-            return '正しく確認できず'
+            logging.error('帳票入力失敗')
+            return '帳票入力失敗'
 
 
     def quit(self, logging_level):
